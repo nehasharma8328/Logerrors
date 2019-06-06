@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>HelloWorld</title>
+  <base href="/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <script>
+    function myErrorFunc() {
+      "use strict";
+      var one = 1;
+      two = "two";
+    }
+    </script>
+</head>
+<body>
+  <app-root></app-root>
+ <h1>Tests</h1>
+
+<p id="demo">
+	<input type="button" value="Run test #1" onclick="asdasda" />
+	Inline onclick handler with invalid JS.
+</p>
+
+<p>
+	<input type="button" value="Run test #2" onclick="myErrorFunc()" />
+	Function with strict mode error.
+</p>
+
+
+
+</body>
+</html>
