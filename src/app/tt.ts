@@ -5,6 +5,10 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 
+
+console.log("hi");
+
+
 @Injectable()
 export class CustomErrorHandler implements ErrorHandler {
   constructor() { }
@@ -37,15 +41,14 @@ export class AppComponent  implements OnInit {
   title = 'app';
   s: string = "Hello2";
   errorString:string="";
-   http1:any
  constructor(private _http:HttpClient)
  {
-  this.http1=this._http;
+ // console.log(this.s) 
 
  }
 
+
 ngOnInit(): void {
-    let http2=this._http;
     console.log(this.s) 
   	var debugMode = true;
 	  var logErrorURL = "https://localhost:44343/api/ErrorLog/";
@@ -56,31 +59,12 @@ ngOnInit(): void {
 			url:        url,
 			lineNum:    lineNum,
 			stackTrace: stackTraceInfo.stackTrace,
-      browser:    stackTraceInfo.browser
-    };
-    console.log(stackTraceInfo.stackTrace);
-    logError(logErrorURL,JSON.stringify(errorInfo),http2);
+			browser:    stackTraceInfo.browser
+		};
+    this.errorString=JSON.stringify(errorInfo);
+    console.log(this.errorString);
+
   };
-
-    function logError(url, postData,obj) {
-		errorLog(url,postData,obj).subscribe(response=>{
-			if(response=="success"){
-				console.log("congo");
-			}
-		})
-	}
-  	 function errorLog(url, body,obj):Observable<any>{
-     body=JSON.stringify(body);  
-		 let headers={'Content-Type':'application/json','Host': 'localhost','Accept': '*/*'}
-		 const httpOptions={
-             headers:headers,
-		 }
-		return obj.post(url,body,httpOptions);
-	}
-  
-  
-
-
 
 	function printStackTrace(options) {
 		options = options || {guess: true};
@@ -137,11 +121,11 @@ ngOnInit(): void {
 			} else if (typeof e.message === 'string' && typeof window !== 'undefined' ) {
 			
 				if (!e.stacktrace) {
-                    return 'chrome'; 
+                    return 'opera9'; 
                 	}
 				// 'opera#sourceloc' in e -> opera9, opera10a
 				if (e.message.indexOf('\n') > -1 && e.message.split('\n').length > e.stacktrace.split('\n').length) {
-					return 'chrome'; 
+					return 'opera9'; // use e.message
 				}
 				// e.stacktrace && !e.stack -> opera10a
 				if (!e.stack) {
@@ -396,11 +380,7 @@ ngOnInit(): void {
 			return '(?)';
 		}
 	};
+  }
+
+
 }
-}
-
-
-
-
-  
-
